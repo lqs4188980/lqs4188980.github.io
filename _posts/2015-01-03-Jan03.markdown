@@ -1,0 +1,8 @@
+---
+layout: post
+title: "Jan 03, Rain and Snow"
+caregories: WriteSomething
+---
+I played a very good soccer game in the morning with friends, though the day was rainy and snowy. I felt great for returning the pitch after two weeks. I made some really good dribbles and passes. However, my shots didn't as good as my dribbles, though I scored two. In the future there are still aspects that are need to improve. The first thing is cross, apparently, I need more practices on that. Also, I found tried to remember the working area of opponents was really helpful. So I need to pay more attention on observe opponents in the future game.  
+    
+I also read python data model article today. I found the "Callable types" part very helpful, but I haven't finished reading. I remembered long time ago when I started writing python code, one of my schoolmates told me "everything in python is object". During reading this article, I was also realized "everything in python is object", and I thought if I began to see everything as object, I can get more flexibility.
