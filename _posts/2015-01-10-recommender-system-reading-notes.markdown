@@ -66,5 +66,73 @@ Source
     
 4. 混合的推荐机制：加权的混合（Weighted Hybridization），切换的混合（Switching Hybridization），分区的混合（Mixed Hybridization），分层的混合（Meta-Level Hybridization）
 
+<hr />
+
+第 2 部分: 深入推荐引擎相关算法 - 协同过滤
+------------------------------
+
+###集体智慧和协同过滤
+####什么是集体智慧(Collective Intelligence)
+> 集体智慧是指在大量的人群的行为和数据中收集答案，帮助你对整个人群得到统计意义上的结论，这些结论是我们在单个个体上无法得到的，它往往是某种趋势或者人群中共性的部分。
+
+####什么是协同过滤(Collaborative Filtering)
+一个简单的例子：
+> 首先想一个简单的问题，如果你现在想看个电影，但你不知道具体看哪部，你会怎么做？大部分的人会问问周围的朋友，看看最近有什么好看的电影推荐，而我们一般更倾向于从口味比较类似的朋友那里得到推荐。这就是协同过滤的核心思想。
+
+>协同过滤一般是在海量的用户中发掘出一小部分和你品位比较类似的，在协同过滤中，这些用户成为邻居，然后根据他们喜欢的其他东西组织成一个排序的目录作为推荐给你。
+
+在推荐之前需要解决的问题：
+
++ 如何确定一个用户是不是和你有相似的品味？
++ 如何将邻居们的喜好组织成一个排序的目录？
+
+####深入协同过滤的核心
+基本步骤：收集用户偏好；找到相似事物；计算推荐  
+
+**收集用户偏好**    
+搜集用户行为的方式：评分，投票，转发，保存书签，Tag，点击流，页面停留时间，购买，etc.   
+
+组合用户行为的方式: 
+
++   将不同的行为分组，如购买了这件商品的人还购买了……                            
++   根据不同行为反映用户喜好的程度将它们进行加权，得到用户对于物品的总体喜好。
+    
+预处理数据：减噪和归一化。
+> 归一化：如前面讲到的，在计算用户对物品的喜好程度时，可能需要对不同的行为数据进行加权。但可以想象，不同行为的数据取值可能相差很大，比如，用户的查看数据必然比购买数据大的多，如何将各个行为的数据统一在一个相同的取值范围中，从而使得加权求和得到的总体喜好更加精确，就需要我们进行归一化处理。最简单的归一化处理，就是将各类数据除以此类中的最大值，以保证归一化后的数据取值在 [0,1] 范围中。 
+
+####找到相似的用户或物品    
+计算相似度的方法    
+
++ 欧几里得距离（Euclidean Distance）    
+    ![欧几里得距离][2]      
+    相似度转换  
+    ![相似度][3]    
+
++ 皮尔逊相关系数（Pearson Correlation Coefficient） 
+    皮尔逊相关系数一般用于计算两个定距变量间联系的紧密程度，它的取值在 [-1，+1] 之间。
+    ![皮尔逊相关系数][4]    
+    sx, sy是 x 和 y 的样品标准偏差。    
+
++ Cosine相似度（Cosine Similarity） 
+    Cosine相似度应用于计算文档相似度：  
+    ![Cosine相似度][5]  
+
++ Tanimoto系数（Tanimoto Coefficient）
+    Tanimoto系数也称为Jaccard系数，是Cosine 相似度的扩展，也多用于计算文档数据的相似度：    
+    ![Tanimoto系数][6]
+
+计算相似邻居的方法      
+
++ 固定数量的邻居：K-neighborhoods 或者 Fix-size neighborhoods。即无论远近，只取最近的K个邻居。但是对于孤立点意义不大，因为孤立点周围邻居太少，要取不太相似的点做邻居。  
++ 基于相似度门槛的邻居：Threshold-based neighborhoods。取在距某点固定距离内的点，邻居点的个数不确定，但是相似度误差较小。  
+
+####计算推荐
 
 [1]: http://www.ibm.com/developerworks/cn/views/web/libraryview.jsp?view_by=search&sort_by=Date&sort_order=desc&view_by=Search&search_by=%E6%8E%A2%E7%B4%A2%E6%8E%A8%E8%8D%90%E5%BC%95%E6%93%8E%E5%86%85%E9%83%A8%E7%9A%84%E7%A7%98%E5%AF%86&dwsearch.x=12&dwsearch.y=11&dwsearch=Go  "探索推荐引擎内部的秘密"
+[2]: http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy2/image003.gif "欧几里得距离"
+[3]: http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy2/image005.gif "相似度公式"
+[4]: http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy2/image007.gif "皮尔逊相关系数计算公式"
+[5]: http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy2/image009.gif "Cosine相似度"
+[6]: http://www.ibm.com/developerworks/cn/web/1103_zhaoct_recommstudy2/image011.gif "Tanimoto系数"
+
+
