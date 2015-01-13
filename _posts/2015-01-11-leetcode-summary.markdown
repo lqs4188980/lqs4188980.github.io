@@ -47,9 +47,9 @@ Problems:
 
 + Combine Two Tables:
 
-> Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for  each of those people.
+    > Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for  each of those people.
 
-Apparently it is a left join for person table, because it requires for each person in person table, but regardless if there is an address for each of those people. 
+    Apparently it is a left join for person table, because it requires for each person in person table, but regardless if there is an address for each of those people. 
 
         Answer:
         SELECT      Person.FirstName, 
@@ -61,7 +61,8 @@ Apparently it is a left join for person table, because it requires for each pers
         ON          Address.PersonId = Person.PersonId;
 
 + Second Highest Salary
-> For example, given the above Employee table, the second highest salary is 200. If there is no second highest salary, then the query should return null.
+
+    > For example, given the above Employee table, the second highest salary is 200. If there is no second highest salary, then the query should return null.
 
     The most tricky part I found is you must identify the empty set and return null if it is empty. You can use `select distinct Employee.Salary from Employee order by Salary desc limit 1, 1;` find out the second highest salary, however, you need to output as `select ifnull((select distinct Employee.Salary from Employee order by Salary desc limit 1, 1), null) as SecondHighestSalary;` so that the `ifnull` function can identify the empty set.
 
