@@ -22,7 +22,21 @@ Median of Two Sorted Arrays
     
     > If there is an odd number of data values then the median will be the value in the middle. If there is an even number of data values the median is the mean of the two data values in the middle.  
     
-    Assume there are two sorted array A and B. The median index of A is Ai, and the median index of B is Bj. And The length of A is m, and the length of B is n. The real median of these two array will be the (m + n) / 2-th element, if the total length is odd, or ((m + n) / 2 + (m + n) / 2 + 1) / 2.0, when the total length is even. There are i elements before Ai in A, and j elements before Bj in B. If (i + j) >= (m + n) / 2, if A[Ai] > B[Bj], then we can drop the part in A that greater than A[Ai]; if A[Ai] > B[Bj], then we drop the part in B that greater than B[Bj]. If (i + j) < (m + n) / 2, if A[Ai] > B[Bj], then we drop the part in B that less than B[Bj], also we need to shrink the median to (m + n) / 2 - the length of dropped part. More detailed explanation: [leetcode之 median of two sorted arrays][1]
+    Assume there are two sorted array A and B. The median index of A is Ai, and the median index of B is Bj. And The length of A is m, and the length of B is n. The real median of these two array will be the (m + n) / 2-th element, if the total length is odd, or ((m + n) / 2 + (m + n) / 2 + 1) / 2.0, when the total length is even. There are i elements before Ai in A, and j elements before Bj in B. If (i + j) >= (m + n) / 2, if A[Ai] > B[Bj], then we can drop the part in A that greater than A[Ai]; if A[Ai] > B[Bj], then we drop the part in B that greater than B[Bj]. If (i + j) < (m + n) / 2, if A[Ai] > B[Bj], then we drop the part in B that less than B[Bj], also we need to shrink the median to (m + n) / 2 - the length of dropped part. More detailed explanation: [leetcode之 median of two sorted arrays][1]   
+
+Regular Expression Matching 
+
++ Abstraction: DFS.
++ How DFS works: For current character in pattern string, 
+    1. If it is not the last char and the next char is not '\*' or it is the last char, which is the normal matching, we compare the current char of s and p. If the current char in p is not '.' and not equal to the current one in s, we return false, else we increase both pointers by 1 and recursively match from the pointer position. Also in this condition, we must make sure the pointer of s still inside.
+    2. Else, the pointer of p doesn't reach the final char and the next char is '\*'. We recursively match the current char of s with the char behind '\*' in p. If match fails, we increase the pointer of s by 1, and do again. If it is fail matching until the pointer of s reaching end, increase the pointer of p by 2 and return the result of matching. 
+
+Dungeon Game    
+
++ Abstraction: Backtracking. Optimized by Dynamic Programming   
++ Basic idea:   
+    minInit[i][j] represents the minimum initial hp when start from (i, j) that can reach to target     
+    minInit[i][j] = max(1, min(minInit[i + 1][j], minInit[i][j + 1]) - dungeon[i][j])
 
 
 
