@@ -36,7 +36,17 @@ Dungeon Game
 + Abstraction: Backtracking. Optimized by Dynamic Programming   
 + Basic idea:   
     minInit[i][j] represents the minimum initial hp when start from (i, j) that can reach to target     
-    minInit[i][j] = max(1, min(minInit[i + 1][j], minInit[i][j + 1]) - dungeon[i][j])
+    minInit[i][j] = max(1, min(minInit[i + 1][j], minInit[i][j + 1]) - dungeon[i][j])   
+
+Longest Substring Without Repeating Characters  
+
++ Abstraction: Double pointer + cache.
++ Longest substring quoted by double pointer. Use HashSet as dictionary to check duplication. If duplication find, update max, start remove element pointed by slow pointer from hashset just after the dup char. If no dup, add element pointed by fast pointer to hashset, increase fast pointer. Attention: you need to update max after the loop finished. Then you'll get the max length.  
+
+Add Two Numbers 
+
++ Abstraction: add number digit by digit.   
++ You need carry, and the raw value is digit1 + digit2 + carry. The new digit is raw % 10, the carry is raw  / 10. After one list reach to end, you need continue calculate the unfinished list with carry. At last you need to check if carry is zero, if not , we still need to add one more digit.
 
 
 
