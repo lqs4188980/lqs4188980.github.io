@@ -46,8 +46,42 @@ Longest Substring Without Repeating Characters
 Add Two Numbers 
 
 + Abstraction: add number digit by digit.   
-+ You need carry, and the raw value is digit1 + digit2 + carry. The new digit is raw % 10, the carry is raw  / 10. After one list reach to end, you need continue calculate the unfinished list with carry. At last you need to check if carry is zero, if not , we still need to add one more digit.
++ You need carry, and the raw value is digit1 + digit2 + carry. The new digit is raw % 10, the carry is raw  / 10. After one list reach to end, you need continue calculate the unfinished list with carry. At last you need to check if carry is zero, if not , we still need to add one more digit.   
 
+Longest Palindromic Substring   
+
++ Abstraction: O(n^2) pairwise substring search. Using dynamic programming cache palindrome judge table.
++ i from [o, length), j from [i - 1, 0]; If charAt(i) == charAt(j) and (i - j < 2 || palin[i - 1][j + 1] == true), palin[i][j] = true; Then update max value, start and end.    
+
+ZigZag Conversion   
+
++ Abstract: Index manipulation and string concatenation.    
++ Separate different rows and append chars to each row. You need a index variable and boolean direction variable. When direction is increasing, increase index and compare it with rows; if it equals to rows, then index = max(0, rows - 2). When direction is decreasing, decrease index and compare with 0; if it less than 0, then index = 1 < rows ? 1 : 0;    
+
+Reverse Integer 
+
++ Abstract: Get each digit of an integer x. x % 10 get tail digit, then x / 10 ready for next one until x == 0.
++ Attention: Use long type store reversed integer. Use sign variable store the sign of x. After reversing, let reversed integer * sign, if the result is greater than largest Integer, or less than smallest integer, return 0. Else cast to int type return.   
+
+String to Integer (atoi)    
+
++ Abstract: String manipulation and convert string to integer.
++ Rules: skip as much spaces as possible. Then if the first non-space char is neither sign nor digit, return 0. If it is sign, set hasSign to true, set start to index, and check next. If the next still sign, and hasSign is true, return 0. If next one is digit, and hasSign = false, set start to index, and break, else, direct break. Then we from the next position of start scan if some chars are not digit. If some chars are not digit, we break. Then we need to filter out if hasSign is true and end - start < 2, which is the sequence only contains a sign, we return 0.   
++ Parse: set index to 0, sign to 1; If first char is sign, we set sign again based on first char, and increase index; else, nothing changes. Use long type as raw cache and check: if sign is 1, then if raw >= Integer.MAX\_VALUE, return Integer.MAX\_VALUE; if  sign is -1, then if raw > Integer.MAX\_VALUE, return Integer.MIN\_VALUE. After parsing, sign multiplies raw and cast the result to int type. 
+
+Palindrome Number   
+
++ Abstraction: Get digits from two side.    
++ First, we need to calculate magnitude order. Then we began to get digits from head and tail of the integer.  If they are not equal, then return false; else, continue until the number reach to zero. Head digit = integer / order, tail digit = integer % 10.    
+
+Container With Most Water   
+
++ Abstraction: Double pointers, always shrink the smaller side. Calculate the area using the smaller height and the distance between the two lines. 
+
+Integer to Roman        
+
++ Abstraction: Integer manipulation.    
++ Romans has different threshold, which matches different symbols. The count for corresponding symbol is calculated by num / threshold. After append the symbols, the number decrease to num % threshold.
 
 
 <hr />
