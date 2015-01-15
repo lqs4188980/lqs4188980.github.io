@@ -51,7 +51,7 @@ Add Two Numbers
 Longest Palindromic Substring   
 
 + Abstraction: O(n^2) pairwise substring search. Using dynamic programming cache palindrome judge table.
-+ i from [o, length), j from [i - 1, 0]; If charAt(i) == charAt(j) and (i - j < 2 || palin[i - 1][j + 1] == true), palin[i][j] = true; Then update max value, start and end.    
++ i from [o, length), j from [i - 1, 0]; If charAt(i) == charAt(j) and (i - j < 2 \|\| palin[i - 1][j + 1] == true), palin[i][j] = true; Then update max value, start and end.    
 
 ZigZag Conversion   
 
