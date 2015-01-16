@@ -81,7 +81,26 @@ Container With Most Water
 Integer to Roman        
 
 + Abstraction: Integer manipulation.    
-+ Romans has different threshold, which matches different symbols. The count for corresponding symbol is calculated by num / threshold. After append the symbols, the number decrease to num % threshold.
++ Romans has different threshold, which matches different symbols. The count for corresponding symbol is calculated by num / threshold. After append the symbols, the number decrease to num % threshold.	
+
+Roman to Integer	
+
++ Abstraction: From digit to integer. 	
++ There are only one condition: current literal-value less than the next one, if it is not the last literal. You need use the latter value subtract the previous one.	
+
+Longest Common Prefix	
+
++ Abstraction: String manipulation	
++ Compare a letter with all the string in the same position. If one of the string is null or length is 0, return "". If the position is out of the string or there are different letter, return substring(0, position).	
+
+3Sum	
+
++ Abstraction: utilizing n - 1 sum to build n sum.	
+
+3Sum Closest	
+
++ Abstraction: Lower the order to 2Sum, and find out 2Sum Closest.	
++ Sort the array first. Pick one element, and start find 2Sum Closest to target - num[i], if distance less than current minimum distance, update min and sum.
 
 
 <hr />
