@@ -100,7 +100,40 @@ Longest Common Prefix
 3Sum Closest	
 
 + Abstraction: Lower the order to 2Sum, and find out 2Sum Closest.	
-+ Sort the array first. Pick one element, and start find 2Sum Closest to target - num[i], if distance less than current minimum distance, update min and sum.
++ Sort the array first. Pick one element, and start find 2Sum Closest to target - num[i], if distance less than current minimum distance, update min and sum.	
+
+4Sum	
+
++ Abstraction: subtract from target and decrease the number of combination to 2Sum	
+
+Letter Combinations of a Phone Number	
+
++ Abstraction: Search every route. O(3^L), L is the length of digits.	
+
+Remove Nth Node From End of List	
+
++ Abstraction: Double pointer start from head. The right pointer needs proceed n - 1 step at first, then the two pointer proceed at the same time until right pointer reach the final node, the left pointer is the node that needs to be deleted.	
+
+Generate Parentheses	
+
++ Abstraction: Search every route. 	
++ There is a limitation: The number of '(' should >= ')'. When the number of '(' + number of ')' == 2n, add current s to result.	
+
+Merge k Sorted Lists	
+
++ Abstraction: Divide and Conquer	
+
+Swap Nodes in Pairs	
+
++ Abstraction: Find out operation block, for this problem, the operation block is prev -> l -> r -> n, l and r are the nodes that need to swap. r cannot be null. After swap, prev = l, l = n, r = n.	
+
+Reverse Nodes in k-Group	
+
++ Abstraction: Find out operation block, use a flag and prev. reverse each pair of node. Generally need l, r, n. Notice that prev.next.next = flag, and prev.next should be the new prev. But before assign prev.next = l, we need a variable temp to store prev.next. Finally let l = flag.	
+
+Remove Duplicates from Sorted Array	
+
++ Abstraction: Something same as insertion sort. A pointer point to the next waiting element, a cache variable for decide duplicate, a pointer point to current position waiting to fill. If waiting element is equal to cache, then jump to next one. Else, put them into current position waiting to fill, both waiting position and waiting element jump to next.
 
 
 <hr />
