@@ -209,4 +209,68 @@ Delegation is midway between inheritance and composition. Java is not directly s
 
 > You place a member object in the class you're building(like composition), but at the same time you expose all the methods from the member object in your new class(like inheritance).	
 
-You need provide wrapper methods that wrap up the delegation object's methods.
+You need provide wrapper methods that wrap up the delegation object's methods.	
+
+###Combining composition and inheritance	
+
+####Guaranteeing proper cleanup	
+When some objects require clean up before being disposed, we can use **try...finally**. The **finally** keyword guaranteed the statement in the finally block will be executed no matter what happens in try.	
+
+> You must also pay attention to the calling order for the base-class and member-object cleanup methods in case one subobject depends on another. In general, you should follow the same form that is imposed by a C++ compiler on its destructors: First perform all of the cleanup work specific to your class, in the reverse order of creation.	
+
+####Name hiding	
+
+> If a Java base class has a method name that's overloaded several times, redefining that method name in the derived class will not hide any of the base=class versions. Thus overloading works regardless of whether the method was defined at this level or in a base class.	Or you can add **@Override** tag.	
+
+###Choosing composition vs. inheritance	
+
+> Composition is generally used when you want the features of an existing class inside your new class, but not its interface.	
+	When you inherit, you take an existing class and make a special version of it. In general, this means that you're taking a general-purpose class and specializing it for a particular need.	
+
+###Upcasting	
+
+Inheritance means "The new class is a type of the existing class." Upcasting is always safe because you're going from a more specific type to a more general type.	
+
+####Composition vs. inheritance revisited	
+
+> One of the clearest ways to determine whether you should use composition or inheritance is to ask whether you'll ever need to upcast from your new class to the base class.	
+
+###The **final** keyword	
+
+####**final** data	
+
+There are two reasons that use a constant:
+
+1. It can be a compile-time constant that won't ever change.	
+2. It can be a value initialized at run time that you don't want changed.	
+
+In Java, the compile-time constant must be primitives and are expressed with the final keyword. A value must be given at the time of definition of such a constant.	
+
+A field that is both static and final has only one piece of storage that cannot be changed.	
+
+When **final** is used with object references, **final** makes the reference a constant. Once the reference s initialized to an object, it can never be changed to point to another object. This restriction includes arrays.	
+
+> Java allows the creation of blank finals, which are fields that are declared as final but are not given an initialization value. In all cases the blank final must be initialized before it is used, and the compiler ensures this. You can either initialize final fields at definition or in constructors.	
+
+Java allows you to make arguments **final** by declaring them as **final** in the argument list. This means that inside the method you cannot change what the argument reference points to.	
+
+####**final** method	
+Used for prevent overriding. 	
+
+#####**final** and **private**	
+> Any **private** methods in a class are implicitly **final**. But you can override **private** method. 	
+
+> "Overriding" can only occur if something is part of the base-class interface. That is, you must be able to upcast an object to its base type and call the same method. If a method is private, it isn't part of the base-class interface. You haven't overridden the method; you've just created a new method.	
+
+####**final** classes	
+A **final** class cannot be inherited. The fields of a final class can be final or not. All methods in a **final** class are implicitly **final**.	
+
+###Initialization and class loading	
+
+####Initialization with inheritance	
+
+1. When class loading, all the static fields are initialized. First the base-class, second the derived class.
+2. Then code start from main.	All the primitives in this object are set to their default values and the object references are set to null.
+3. Initialize an inherited class instance, first call base-class constructor.	
+4. All the instance fields in inherited class are initialized		
+5. Execute the rest of derived constructor.
