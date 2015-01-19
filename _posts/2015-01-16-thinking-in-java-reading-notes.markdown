@@ -149,4 +149,64 @@ Constructor initialization
 + There is a similar form for initializing non-static variables for each object. Just use {} quote all the initialize statement. It will be executed before constructor is called.	
 
 Enumerated types	
-When a enum type created, the compiler added useful features to the type, like toString() print the name of an enum instance, ordinal() method to indicated the declaration order of a particular enum constant, values() returns an array of values of the enum constants in the order that they were declared. In fact, enums are classes and have their own methods.
+When a enum type created, the compiler added useful features to the type, like toString() print the name of an enum instance, ordinal() method to indicated the declaration order of a particular enum constant, values() returns an array of values of the enum constants in the order that they were declared. In fact, enums are classes and have their own methods.	
+
+Ch5: Access Control
+------------------------------	
+
+**Access control (or implementation hiding) is about "not getting it right the first time"**	
+Motivation of Access Control: Sometimes we need refactoring. We want **"separate the things that change from the things that stay the same."** This is very important to libraries.	
+
+Java has access specifiers, the levels of access control from "most access" to "least access" are public, protected, package access(which has not keyword, generally described as default), and private.	
+
+###Package: the library unit.	
+Each source-code file is a compilation unit. The file name should be the same as public class name. For each source-code file, there are only one public class.	After compile the source code, each .java file has a corresponding .class file. A library is a group of these class files.	
+> If you use a **package** statement, it must appear as the first non-comment in the file. 	
+
+If you follow the reversed Internet domain name convention, your package name will be unique and you'll never have a name clash.	
+
+Java interpreter finds .class in the follow step: It finds the environment variable CLASSPATH. Start from that root, the interpreter will take the package name and replace each dot with a slash to generate a path name off of the CLASSPATH root. Then concatenated to the various entries in the CLASSPATH.	
+
+**protected** keyword: If you create a new package and inherit from a class in another package, the only members you have access to are the public members of the original package. If you inherit from the same package, you can manipulate all the members that have package access. Sometimes the creator of the base class would like to take a particular member and grant access to derived classes but not the world in general. That's what protected does.	
+
+###Interface and implementation	
+
+Access control puts boundaries within a data type for two important reasons. The first is to establish what the client programmers can and can't use. The second is separate the interface from the implementation.	
+
+###Class access	
+
+If you want a class to be available to a client programmer, you use the public keyword on the entire class definition.	 Actually if there is no public class in a source file, you can name it whatever you want.	
+A class cannot be private or protected. So you have only two choices for class access: package access or public.	
+If you don't want anyone else to have access to that class, you can make all the constructors private, thereby preventing anyone but you, inside a static member of the class, from creating an object of that class.	
+
+Ch6: Reusing Classes	
+----------------------------------	
+
+There are two ways to use the classes without soiling the existing code in Java.	The one is directly create an object and use it inside the new class, which is called composition. This is simply reusing the functionality of the code, not its form. The other approach is creates a new class as type of an existing class. This technique is called inheritance.	
+
+###Composition syntax	
+
+Four places to initialize references:
+
+1. At the point the objects are defined.	
+2. In the constructor for that class	
+3. Right before you actually need to use the object. This is called lazy initialization.	
+4. Use instance initialization, which is initialization statement quoted by "{}". It will be called every time an instance is created.	
+
+Trick: You can put a main() method in every classes for easy testing.	
+
+###Inheritance syntax	
+
+####Initializing the base class	
+
+> When you create an object of the derived class, it contains within it a subobject of the base class. And it's essential that the base-class subobject be initialized correctly, and there's only one way to guarantee this: Perform the base-class initialization. Java automatically inserts calls to the base-class constructor in the derived-class constructor.	
+
+> If your class doesn't have default arguments, or if you want to call a base-class constructor that has an argument, you must explicitly write the calls to the base-class constructor using the **super** keyword and the appropriate argument list.	
+
+###Delegation	
+
+Delegation is midway between inheritance and composition. Java is not directly support this relationship.	
+
+> You place a member object in the class you're building(like composition), but at the same time you expose all the methods from the member object in your new class(like inheritance).	
+
+You need provide wrapper methods that wrap up the delegation object's methods.
