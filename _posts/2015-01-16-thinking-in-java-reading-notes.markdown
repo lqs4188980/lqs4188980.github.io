@@ -108,7 +108,7 @@ Ch3: Operators
 
 The comma operator: a number of statements separated by commas, and those statements will b evaluated sequentially.	
 Foreach syntax: for use with arrays and containers. foreach will also work with any object that is **Iterable**	
-
+<hr />
 Ch4: Initialization & Cleanup
 ----------------------------------
 
@@ -117,9 +117,9 @@ Overloading with primitives: A primitive can be automatically promoted from a sm
 The **this** keyword: if you are inside a method and you'd like to get the reference to the current object. The **this** keyword can be used only inside a non-static method, produces the reference to the object that the method has been called for. Call a method from a method in the same class, don't need to use this. The **this** keyword s also useful for passing the current object to another method. 	
 	When calling constructors from constructors, you can simply use this(some arguments). It doesn't means the current object, but makes an explicit call to the constructor that matches that argument list.	
 
-Cleanup: finalization and garbage collection	
+###Cleanup: finalization and garbage collection	
 
-Understanding about GC:
+####Understanding about GC:
 
 + Your objects might not get garbage collected. 
 + Garbage collection is not destruction	
@@ -127,7 +127,7 @@ Understanding about GC:
 
 finalize() does not called graranteed. But we can use finalize() to verify if the termination condition is satisfied.	
 
-How a GC works.
+####How a GC works.
 
 + Simple but slow GC technique is reference counting. Problem is for circular reference, it cannot detect the garbage.
 + Faster scheme based on the idea that any non-dead object must ultimately be traceable back to a reference that lives either on the stack or in static storage.	
@@ -138,19 +138,19 @@ How a GC works.
 + JIT partially or fully converts some code into machine code and thus runs much faster. It has two draw backs: one is takes a little more time at first, and added size to the executable, which might cause paging.	
 + Another approach is laze evaluation, which means the code is not JIT compiled until necessary.	
 
-Member initialization	
+####Member initialization	
 If operate an uninitialized variable, will get an error, but they do have default initial value.	
 
-Constructor initialization	
+####Constructor initialization	
 
 + Order of initialization: Within a class, the order of initialization is determined by the order that the variables are defined within the class. The variables are initialized before any methods can be called-even the constructor.	
 + **static** data initialization: If you want to place initialization at the point of definition, it looks the same as for non-statics.	The order of initialization is **static** first, if they haven't already been initialized by previous object creation. Then the non-static	
 + Explicit **static** initialization: Java allows you to group other **static** initializations inside a special "**static** clause", sometimes called static block. **It appears to be a method, but it's just the static keyword followed by a block of code**. This code is executed only once: the first time you make an object of that class or the first time you access a static member of that class.	
 + There is a similar form for initializing non-static variables for each object. Just use {} quote all the initialize statement. It will be executed before constructor is called.	
 
-Enumerated types	
+###Enumerated types	
 When a enum type created, the compiler added useful features to the type, like toString() print the name of an enum instance, ordinal() method to indicated the declaration order of a particular enum constant, values() returns an array of values of the enum constants in the order that they were declared. In fact, enums are classes and have their own methods.	
-
+<hr />
 Ch5: Access Control
 ------------------------------	
 
@@ -178,7 +178,7 @@ Access control puts boundaries within a data type for two important reasons. The
 If you want a class to be available to a client programmer, you use the public keyword on the entire class definition.	 Actually if there is no public class in a source file, you can name it whatever you want.	
 A class cannot be private or protected. So you have only two choices for class access: package access or public.	
 If you don't want anyone else to have access to that class, you can make all the constructors private, thereby preventing anyone but you, inside a static member of the class, from creating an object of that class.	
-
+<hr />
 Ch6: Reusing Classes	
 ----------------------------------	
 
@@ -274,7 +274,7 @@ A **final** class cannot be inherited. The fields of a final class can be final 
 3. Initialize an inherited class instance, first call base-class constructor.	
 4. All the instance fields in inherited class are initialized		
 5. Execute the rest of derived constructor.	
-
+<hr />
 
 Ch7: Polymorphism	
 ------------------------------------	
@@ -336,5 +336,100 @@ An overridden method in a derived class can return a type derived from the type 
 About pure-inheritance or extend new method to derived class.	
 
 ####Downcasting and runtime type information	
-Java hase cast checking mechanism, The act of checking types at run time is called runtype identification (RTTI).
+Java hase cast checking mechanism, The act of checking types at run time is called runtype identification (RTTI).	
+
+<hr />
+
+Ch8: Interfaces	
+----------------------	
+
+###Abstract classes and methods	
+
+abstract method: This is a method that is incomplete; it has only a declaration and no method body.	
+
+A class containing abstract methods is called an abstract class.	
+
+Compiler ensures it is impossible to create an object of an abstract class.	
+
+Derived-class should implement all the abstract methods if you want to make objects of the new type. Else, it is an abstract class.	
+
+It's possible to make a class abstract without including any abstract methods. It prevent any instances of that class.	
+
+###Interface	
+The **interface** keyword produces a completely abstract class, one that provides no implementation at all.	
+
+> An interface says, "All classes that implement this particular interface will look like this."	
+
+> So the interfaces used to establish a "protocol" between classes.	
+
+> However, an interface is more than just an abstract class taken to the extreme, since it allows you to perform a variation of "multiple inheritance" by creating a class that can be upcast to more than one base type.	
+
+An interface can also contain fields, but these are implicitly **static** and **final**.	
+
+When you implement an interface, the methods from the interface must be defined as public.	
+
+###Complete decoupling	
+
+If a method is work with a class not an interface, it is limited to work with the class inheritance hierarchy. But interfaces relaxes this constraint considerably.	
+
+> Creating a method that behaves differently depending on the argument object that you pass it is called the Strategy design pattern.	The method contains the fixed part of the algorithm to be performed, and the Strategy contains the part that varies.	
+
+If you cannot modify the library, you can use Adapter design pattern. 	
+> In Adapter, you write code to take the interface that you have and produce the interface that you need.	
+
+Decoupling interface from implementation allows an interface to be applied to multiple different implementations, and thus your code is more reusable.	
+
+###"Multiple inheritance" in Java	
+
+> In a derived class, you aren't forced to have a base class that is either **abstract** or "concrete". If you do inherit from a non-interface, you can inherit from only one. All the rest of the base elements must be interfaces. You place all the interface names after the **implements** keyword and separate them with commas. You can have as many interfaces as you want. You can upcast to each interface, because each interface is an independent type.	
+
+Reason for interfaces:
+
+1. Can upcast an object to more than one base type.	
+2. Can prevent the client programmer from making an object of this class and to establish that it is only an interface	
+
+###Extending an interface with inheritance	
+
+You get a new interface when extending an interface. By extending interface, you can add new methods to interface, or combining different interfaces into a new interface. Interface support multiple inheritance.	
+
+####Name collisions when combining interfaces: should avoid using identical method names.	
+
+###Adapting to an interface	
+
+> Because you can add an interface onto any existing class in  this way, it means that a method that takes an interface provides a way for any class to be adapted to work with that method. This is the power of using interfaces instead of classes.	
+
+###Fields in interfaces	
+
+All fields in an interface are automatically **static** and **final**, the interface is a convenient tool for creating groups of constant values.	
+
+####Initializing fields in interfaces	
+
+Fields defined in interfaces cannot be "blank **final**s", but they can be initialized with non-constant expressions.	
+
+The fields are not part of the interface. The values are stored in the static storage area for that interface.		
+
+###Nesting interfaces	
+
+Interfaces may be nested within classes and within other interfaces.	
+
+A nested interface in a class can be private.	
+
+If an inner class that implements a private interface, that inner class can only be used as itself. 	
+> You are not allowed to mention the fact that it implements the private interface, so implementing a private interface is a way to force the definition of the methods in that interface without adding any type information (that is, without allowing any upcasting)	
+
+The only way to use an private interface instance is to hand the object to another object that has permission to use it.	
+
+All the interfaces that nested in an interface is forced to be public.	
+
+> When you implement an interface, you are not required to implement any interfaces nested within. Also, **private** interfaces cannot be implemented outside of their defining classes.	
+
+###Interfaces and factories		
+
+An interface is intended to be a gateway to multiple implementations, and a typical way to produce objects that fit the interface is the Factory Method design pattern.	
+
+A class implements some service through interface, and an additional class implements service factory interface corresponding to the service interface to produce objects that providing services. Then when you create method that accept objects that implement service factory interface, you can send different service factory objects to that method, and use the service factory object produce new objects that provide specific services. This design pattern enable your code completely isolated from the implementation of the interface, thus making it possible to transparently swap on implementation for another.	
+
+###Summary	
+
+> An appropriate guideline is to prefer classes to interfaces. Start with classes, and if it becomes clear that interfaces are necessary, then refactor. Interfaces are a great tool, but they can easily be overused.
 
