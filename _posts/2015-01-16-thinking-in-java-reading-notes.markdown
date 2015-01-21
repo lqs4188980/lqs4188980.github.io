@@ -273,4 +273,68 @@ A **final** class cannot be inherited. The fields of a final class can be final 
 2. Then code start from main.	All the primitives in this object are set to their default values and the object references are set to null.
 3. Initialize an inherited class instance, first call base-class constructor.	
 4. All the instance fields in inherited class are initialized		
-5. Execute the rest of derived constructor.
+5. Execute the rest of derived constructor.	
+
+
+Ch7: Polymorphism	
+------------------------------------	
+
+> It provides another dimension of separation of interface from implementation, to decouple what from how.	
+
+Polymorphism also called dynamic binding or late binding or run-time binding.	
+
+Taking an object reference and treating ti as a reference to its base type is called upcasting.	
+
+###The twist	
+
+####Method-call binding	
+
+> Connecting a method call to a method body is called binding.	
+
+> When binding is performed before the program is run, it's called early binding. 	
+
+All method binding in Java uses late binding unless the method is static or final(private methods are implicitly final).	
+
+####Extensibility	
+
+In a well-designed OOP program, most or all of your methods will follow the model and communicate only with the base-class interface. Such a program is extensible. The methods that manipulate the base-class interface will not need to be changed at all to accommodate the new classes.	
+
+####Pitfall: "overriding" **private** methods	
+Only non-private methods may be overridden, so if the derived class has a same name method with a base-class private method, it is not override, it just a new method. And If you assign the derived class object to a base-class reference and call this method, it will directly call the base-classes private method.	
+
+####Pitfall: fields and **static** methods	
+Only ordinary method calls can be polymorphic. **static** method doesn't behave polymorphically. **static** methods are associated with the class, and not the individual objects.	
+
+###Constructors and polymorphism	
+
+**Constructors are not polymorphic, they're actually static methods, but the static declaration is implicit.	
+
+Order of constructor calls:
+
+1. The base-class constructor is called. This step is repeated recursively such that the root of the hierarchy is constructed first, followed by the next-derived class, until the most-derived class is reached.	
+2. Member initializers are called in the order of declaration	
+3. The body of the derived-class constructor is called.	
+
+####Inheritance and cleanup	
+
+When you have a clean method in base-class, you should override it in derived class and do some specific clean. When call the clean method in derived class, you should call the base-class cleanup method in reverse order of creation.	
+
+When you share object with other objects, you maybe need reference counting before call clean method so that prevent memory leak.	
+
+####Behavior of polymorphic methods inside constructors	
+
+> If you call a dynamically-bound method inside a constructor, the overridden definition for that method is used. However, the effect of this call can be rather unexpected because the overridden method will be called before the object is fully constructed. This can conceal some difficult-to-find bugs.	
+
+###Covariant return types	
+
+An overridden method in a derived class can return a type derived from the type returned by the base-class method. Before Java SE5, it will force to return a base-class return type in derived-class overridden method.	
+
+###Design with inheritance	
+
+####Substitution vs. extension
+
+About pure-inheritance or extend new method to derived class.	
+
+####Downcasting and runtime type information	
+Java hase cast checking mechanism, The act of checking types at run time is called runtype identification (RTTI).
+

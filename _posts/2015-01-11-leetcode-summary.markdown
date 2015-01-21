@@ -133,7 +133,41 @@ Reverse Nodes in k-Group
 
 Remove Duplicates from Sorted Array	
 
-+ Abstraction: Something same as insertion sort. A pointer point to the next waiting element, a cache variable for decide duplicate, a pointer point to current position waiting to fill. If waiting element is equal to cache, then jump to next one. Else, put them into current position waiting to fill, both waiting position and waiting element jump to next.
++ Abstraction: Something same as insertion sort. A pointer point to the next waiting element, a cache variable for decide duplicate, a pointer point to current position waiting to fill. If waiting element is equal to cache, then jump to next one. Else, put them into current position waiting to fill, both waiting position and waiting element jump to next.	
+
+Remove Element	
+
++ Abstraction: Two pointer, scan from head and tail. The right of the tail pointer is the block that contains disposed elements. The head pointer is pointing to the element that waiting to judge. Every time we found head pointer's element equals to elem, we put tail pointer's element to that position, shrink tail pointer by 1 and judge again.	
+
+Implement strStr()	
+
++ Abstraction: string pattern matching.	
++ You should finish brute force method in a very short time. And know Rabin-Karp algorithm, KMP algorithm, and the Boyer-Moore algorithm.	
+
+Divide Two Integers	
+
++ Abstraction: Use shift, increase divisor to approach dividend as much as possible, then dividend subtract the approached value, then the shift times is the quotient.	Must be very careful about overflow problem. When calculating quotient, just use long store and return. When return the result, first check if it should be negative, if it is negative, ~value + 1. Then if  the value greater than MAX_VALUE, return MAX_VALUE; if it is less than MIN_VALUE, return MIN_VALUE.	
+
+Substring with Concatenation of All Words	
+
++ Abstraction: Use HashMap as checker and for each specific length, check each word if it exist in the HashMap. If it exists, update counter and count info at "found" map. If not, continue to next start and restart the process.	
+
+Next Permutation	
+
++ Abstraction: Find the first digit j that larger than its previous one i. Then sort from that position j to end. Then pick one that is larger than i, swap these two integer and return. Else, sort the whole array and return.	
+
+Longest Valid Parentheses	
+
++ Abstraction: Every time we pop a '(' from stack means we found an valid parentheses, we can update length. The length is :
+	1. If the stack is empty, then the length is current loop index + 1.
+	2. If the stack is not empty, the length is current loop index - stack.peek()	
+
++ So we need a stack to store each index of '('. Every time we encounter a ')', we check if the stack is empty and if the top of stack is the index point to '(', if true, we pop one from stack, and update length. If not true, we push this index into stack.	
+
+Search in Rotated Sorted Array	
+
++ Abstraction: Binary Search	
++ Have to find ordered part: A[l] <= A[mid] or A[mid] <= A[r]. Then if A[l] <= A[mid], and target >= A[l] and target < A[mid], r = mid - 1, else l = mid + 1; If A[l] > A[mid], means A[mid] <= A[r], then if target > A[mid] and target <= A[r], l = mid + 1, else r = mid - 1.
 
 
 <hr />
