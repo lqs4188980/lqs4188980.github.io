@@ -431,5 +431,93 @@ A class implements some service through interface, and an additional class imple
 
 ###Summary	
 
-> An appropriate guideline is to prefer classes to interfaces. Start with classes, and if it becomes clear that interfaces are necessary, then refactor. Interfaces are a great tool, but they can easily be overused.
+> An appropriate guideline is to prefer classes to interfaces. Start with classes, and if it becomes clear that interfaces are necessary, then refactor. Interfaces are a great tool, but they can easily be overused.	
 
+<hr />
+
+Ch9: Inner Classes	
+------------------------------------
+
+It's possible to place a class definition within another class definition. This is called an inner class.	
+
+###Creating inner classes	
+Placing the class definition inside a surrounding class.	
+> If you want to make an object of the inner class anywhere except from within a **non-static** method of the outer class, you must specify the type of that object as <i>OuterClassName.InnerClassName</i>.	
+
+##The link to the outer class	
+
+When you create an inner class, an object of that inner class has a <i>link to the enclosing objet that made it</i>, and so it can access the members of that enclosing object - without any special qualifications. In addition, inner classes have access rights to all the elements in the enclosing class.	
+
+The inner class will capture a reference to a particular object of the enclosing class. Then, when refer to a member of the enclosing class, that reference is used to select that member. An inner class can be created only in association with an object of the enclosing class. Construction of the inner-class object requires the reference to the object of the enclosing class, and the compiler will take care this.	
+
+###Using **.this** and **.new**	
+
+> If you need to produce the reference to the outer-class object, you name the outer class followed by a dot and **this**. This reference is known and checked at compile time, so there is no runtime overhead. 	
+
+> Sometimes you want to tell some other object to create an object of one of its inner classes. To do this you must provide a reference to the other outer-class object in the **new** expression, using the **.new** syntax.	
+
+It's not possible to create an object of the inner class unless you already have an object of the outer class. However, if you make a <i>nested class</i>(a **static** inner class), then it doesn't need a reference to the outer-class object.	
+
+####Inner classes and upcasting	
+
+We can implement some interfaces using private or protected inner classes. When using these interfaces, we can upcast the inner class objects to interfaces references, and these inner classes are completely hide from outside.	
+
+> The **private** inner class provides a way for the class designer to completely prevent any type-coding dependencies and to completely hide details about implementation.	
+
+####Inner classes in methods and scopes		
+
+An inner class is created within the scope of a method. This is called a <i>local inner class</i>.	 This class cannot be accessed outside of the method. The class defined inside a method doesn't mean that class cannot have object reference once the method returns.	
+
+The class can only be used inside the scope of its definition. However, it is created with everything else, just cannot access until inside the scope.	
+
+###Anonymous inner classes	
+
+Defined along with some object initialization, and return the type of creation required type.	
+
+> If you're defining an anonymous inner class and want to use an object that's defined outside the anonymous inner class, the compiler requires that the argument reference be **final**.	
+
+You can still use instance initialization statement partly implement some constructor functions.	
+
+> Anonymous inner classes are somewhat limited compared to regular inheritance, because they can either extend a class or implement an interface, but not both. And if you do implement an interface, you can only implement one.
+
+###Nested classes	
+
+If you don't need a connection between the inner-class object and the outer-class object, then you can make the inner class **static**. This is commonly called a <i>nested class</i>.	
+
+> A nested class means:	
+	1. You don't need an outer-class object in order to create an object of a nested class.			
+	2. You can't access a non-static outer-class object from an object of a nested class.	
+
+A nested class can have static date, static fields, or nested classes. An ordinary non-static inner class cannot have all of above.	
+
+Outer class has full access to the inner class methods and variables, no matter they are public or private.	
+
+####Classes inside interfaces	
+
+> Normally, you can't put any code inside an interface, but a nested class <i>can</i> be part of an interface. Any class you put inside an interface is automatically **public** and **static**.		
+
+####Reaching outward from a multiply nested class	
+
+> It doesn't matter how deeply an inner class may be nested - it can transparently access all of the members of all the classes it is nested within.		
+
+> The "**.new**" syntax produces the correct scope, so you do not have to qualify the class name in the constructor call.
+
+###Why inner classes?
+
+The most compelling reason for inner classes is:	
+
+> Each inner class can independently inherit from an implementation. Thus, the inner class is not limited by whether the outer class is already inheriting from an implementation.	
+
+So Java does support multiple inheritance, but in another way.
+
+With inner classes you have these additional features:	
+
+1. The inner class can have multiple instances, each with its own state information that is independent of the information in the outer-class object.	
+2.In a single outer class you can have several inner classes, each of which implements the same interface of inherits from the same class in a different way. 
+3. The point of creation of the inner-class object is not tied to the creation of the outer-class object.	
+4. There is no potentially confusing "is-a" relationship with the inner class; it's a separate entity.	
+
+####Closures & callbacks	
+
+A closure is a callable object that retains information from the scope in which it was created. From  this definition, you can see that an inner class is an object-oriented closure, because it does't just contain each piece of information from the outer-class object, but it automatically holds a reference back to the whole outer-class object, where it has permission to manipulate all the members, even private ones.
+	

@@ -167,7 +167,29 @@ Longest Valid Parentheses
 Search in Rotated Sorted Array	
 
 + Abstraction: Binary Search	
-+ Have to find ordered part: A[l] <= A[mid] or A[mid] <= A[r]. Then if A[l] <= A[mid], and target >= A[l] and target < A[mid], r = mid - 1, else l = mid + 1; If A[l] > A[mid], means A[mid] <= A[r], then if target > A[mid] and target <= A[r], l = mid + 1, else r = mid - 1.
++ Have to find ordered part: A[l] <= A[mid] or A[mid] <= A[r]. Then if A[l] <= A[mid], and target >= A[l] and target < A[mid], r = mid - 1, else l = mid + 1; If A[l] > A[mid], means A[mid] <= A[r], then if target > A[mid] and target <= A[r], l = mid + 1, else r = mid - 1.	
+
+Search for a Range	
+
++ Abstraction: Binary Search	
++ Two methods: 
+	1. Recursion: If A[mid] == target, update lower bound and upper bound, then search on the both side to update bounds. If not, only search the possible side to update bounds.	
+	2. Binary search for lower bound and upper bound.	
+
+Search Insert Position	
+
++ Abstraction: Binary Search for right position	
++ Normal binary search until exit the loop. If we found A[mid] == target in the loop, return mid. After exit loop, if A[mid] < target, then we know target should insert after mid; if A[mid] > target, then we know target should insert at mid.	
+
+Valid Sudoku	
+
++ Abstraction: Loop the correct area.	
++ For square validation, you should specify starting row index and column index. You cannot just specify a single index.	
+
+Sudoku Solver	
+
++ Abstraction: DFS	
++ Find empty slot first, then scan current row and column and square of empty slot, get a table of all the digits that already filled, then find a digit that hasn't been used and fill it into board, send the filled board to next level, until some level that cannot find an empty slot, return that board. If the returned board is null, which means current digit doesn't work, then fill the next one and try again, until find a solution.
 
 
 <hr />
