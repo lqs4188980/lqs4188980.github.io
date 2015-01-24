@@ -189,7 +189,20 @@ Valid Sudoku
 Sudoku Solver	
 
 + Abstraction: DFS	
-+ Find empty slot first, then scan current row and column and square of empty slot, get a table of all the digits that already filled, then find a digit that hasn't been used and fill it into board, send the filled board to next level, until some level that cannot find an empty slot, return that board. If the returned board is null, which means current digit doesn't work, then fill the next one and try again, until find a solution.
++ Find empty slot first, then scan current row and column and square of empty slot, get a table of all the digits that already filled, then find a digit that hasn't been used and fill it into board, send the filled board to next level, until some level that cannot find an empty slot, return that board. If the returned board is null, which means current digit doesn't work, then fill the next one and try again, until find a solution.	
+
+Count and Say	
+
++ Abstraction: Use a queue to track the sequence. The last output is the next input.	
+
+Combination Sum
+
++ Abstraction: Deep search, until reach target.	
++ This problem is based on set. No duplicate numbers, but we can pick the same number many times. For each deeper level, we didn't increase the start index so that we can continue add the same element again and again. Because the set doesn't contain duplicate elements, so we don't need signature to check duplicates.	
+
+Combination Sum II	
+
++ Abstraction: Same as above. Just added duplicate checker and increase start index for every deeper level.
 
 
 <hr />

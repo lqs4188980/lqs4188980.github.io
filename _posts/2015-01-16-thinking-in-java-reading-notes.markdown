@@ -520,4 +520,159 @@ With inner classes you have these additional features:
 ####Closures & callbacks	
 
 A closure is a callable object that retains information from the scope in which it was created. From  this definition, you can see that an inner class is an object-oriented closure, because it does't just contain each piece of information from the outer-class object, but it automatically holds a reference back to the whole outer-class object, where it has permission to manipulate all the members, even private ones.
-	
+
+> One of the most compelling arguments made to include some kind of pointer mechanism in Java was to allow callbacks. With a callback, some other object is given a piece of information that allows it to call back into the originating object at some later point.	
+
+####Inner classes & control frameworks	
+
+> An <i>application framework</i> is a class or a set of classes that's designed to solve a particular type of problem. To apply an application framework, you typically inherit from one or more classes and override some of the methods. The code that you write in the overridden methods customizes the general solution provided by that application framework in order to solve your specific problem. This is an example of the <i>Template Method</i> design pattern.	
+
+> A control framework is a particular type of application framework dominated by the need to respond to events.	
+
+**A system that primarily responds to events is called an <i>event-driven system</i>.**	
+
+A common problem in application programming is the graphical user interface, which is almost entirely event-driven.	
+
+###Inheriting from inner classes	
+
+When inheriting from inner class, you must initialize an outer class object and send it into inherited class' constructor. You must use the syntax:	
+
+	enclosingClassReference.super();	
+
+inside the constructor.	
+
+###Can inner classes be overridden?	
+
+No. The only way is explicitly add "extends" to the inner class of the inherited class.	
+
+###Local inner classes	
+
+Defined in the method body. It can access all the fields of the outer class. 	
+The two reasons that you choose inner local class over anonymous inner class:	
+
+1. You need a named constructor or an overloaded constructor	
+2. You need more than one object of that class	
+
+###Inner-class identifiers	
+
+inner class .class file naming convention: enclosingClassName$innerClassName.class	
+
+If inner classes are anonymous, the compiler simply starts generating numbers as inner-class identifiers.	
+
+<hr />
+
+Ch10: Holding Your Objects	
+--------------------------------------	
+
+When you cannot decide how much objects and what type they are you need to hold, you should use container.	
+
+Java basic container classes type are **List, Set, Queue, and Map**.	
+
+###Generics and type-safe containers	
+
+With generics(using type parameters), you're prevented, at compile time, from putting the wrong type of object into a container.	
+
+###Basic concepts	
+
+The Java container library divides the "holding your objects" idea into two distinct concepts:	
+
+1. **Collection**: a sequence of individual elements with one or more rules applied to them. 	
+
+	> A **List** must hold the elements in the way that they were inserted, a **Set** cannot have duplicate elements, and a **Queue** produces the elements in the order determined by a queuing discipline(usually the same order in which they are inserted).		
+
+2. **Map**: a group of key-value object pairs, allowing you to look up a value using a key.	
+
+	> An **ArrayList** allows you to look up an object using a number, so in a sense it associates numbers to objects. A map allows you to look up an object using another object. It's also called an associative array, because it associates objects with other objects, or a dictionary, because you look up a value object using a key object just like you look up a definition using a word.
+
+###Adding groups of elements	
+
+**Arrays.asList(): taking either array of comma-separated list of elements, returns List object.**	
+**Collections.addAll(): takes a Collection object or an array or a comma-separated list and adds the elements to the Collection.**	
+
+Arrays.<type>asList() can tell the compiler what the actual target type should be for the resulting **List** type produced by **Arrays.asList()**. This is called an explicit type argument specification.	
+
+###Printing containers	
+
++ Print array: Arrays.toString()	
++ Print collection & Map: direct print. A Collection is printed surrounded by square brackets, with each element separated by a comma. A Map is surrounded by curly braces, with each key and value associated with an equal sign.		
+
+HashSet, TreeSet and LinkedHashSet are types of Set.	
+
++ The HashSet is the fastest way to retrieve elements, and as a result the storage order can seem nonsensical.	
++ TreeSet keeps the objects in ascending comparison order.	
++ LinkedHashSet keeps the objects in the order in which they were added.	
+
+> HashMap provides the fastest lookup technique, and also doesn't hold its elements in any apparent order. A TreeMap keeps the keys sorted by ascending comparison order, and a LinkedHashMap keeps the keys in insertion order while retaining the lookup speed of the HashMap.	
+
+###List	
+
+There are two types of List:
+
++ The basic ArrayList, which excels at randomly accessing elements, but is slower when inserting and removing elements in the middle of a List.	
++ The LinkedList, which provides optimal sequential access, with inexpensive insertions and deletions from the middle of the List. A LinkedList is relatively slow for random access, but it has a larger feature set than the ArrayList.	
+
+###Iterator	
+
+An iterator is an object whose job is to move through a sequence and select each object in that sequence without the client programmer knowing or caring about the underlying structure of that sequence. 	
+
+Iterators sometimes called unify access to containers.	
+
+####ListIterator	
+
+> The ListIterator is a more powerful subtype of Iterator that is produced only by List classes. While Iterator can only move forward, ListIterator is bidirectional. It can also produce the indexes of the next and previous elements relative to where the iterator is pointing in the list, and it can replace the last element that it visited using the set() method. You can produce ListIterator pointing at the beginning by calling listIterator() or pointing at index n by calling listIterator(n).	
+
+###LinkedList	
+
+> LinkedList also adds methods that allow it to be used as a stack, a Queue or a double-ended queue(deque).	
+
+###Stack	
+
+Implemented based on LinkedList, which is better for story telling.	
+
+###Set	
+
+A Set determines membership based on the "value" of an object.	
+
+TreeSet keeps elements sorted into a red-black tree data structure.	
+
+LinkedHashSet also uses hashing for lookup speed, but appears to maintain elements in insertion order using a linked list.	
+
+###Map	
+
+###Queue	
+
+offer() is one of the Queue-specific methods; it inserts an element at the tail of the queue if it can, or returns false/ Both peek() and element() return the head of the queue without removing it, but peek() returns null if the queue is empty and element() throws NoSuchElementException. Both poll() and remove() remove and return the head of the queue, but poll() returns null if the queue is empty, while remove() throws NoSuchElementException.	
+
+####PriorityQueue	
+
+> A queuing discipline is what decides, given a group of elements in the queue, which one goes next. 	
+
+Apriority queue says that the element that goes next is the one with the greatest need	
+
+When you offer() an object onto a PriorityQueue, that object is sorted into the queue. The default sorting uses the natural order of the objects in the queue, but you can modify the order by providing your own Comparator. 	
+
+###collection vs. Iterator	
+
+Collection is the root interface that describes what is common for all sequence containers. In addition, the java.util.AbstractCollection class provides a default implementation for a Collection, so that you can create a new subtype of AbstractCollection without unnecessary code duplication. 	
+
+Commonality achieved from implementing interface or through iterators.	
+
+> Producing an Iterator is the least-coupled way of connecting a sequence to a method that consumes that sequence, and puts far fewer constraints on the sequence class than does implementing Collection.	
+
+###Foreach and iterators	
+
+Foreach syntax works both array and Collection object.	
+
+Foreach uses **Iterable** interface to move through a sequence.	
+
+**Iterable** interface has **iterator()** method, which returns an instance of an anonymous inner implementation.	
+
+All **Collection** classes except **Map** are being made **Iterable**.	
+
+An array is not automatically **Iterable**.	
+
+####The <i>Adapter Method</i> idiom	
+
+> When you have one interface and you need another one, and you cannot override the old one, writing an adapter solves the problem.	
+
+**Arrays.asList()** produces a **List** object that uses the underlying array as its physical implementation. If you do anything to that **List** that modifies it, and you don't want the original array modified, you should make a copy into another container.
