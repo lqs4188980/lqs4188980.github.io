@@ -202,7 +202,26 @@ Combination Sum
 
 Combination Sum II	
 
-+ Abstraction: Same as above. Just added duplicate checker and increase start index for every deeper level.
++ Abstraction: Same as above. Just added duplicate checker and increase start index for every deeper level.	
+
+Largest Number	
+
++ Abstraction: String sorting. Get a total order of strings. 	
++ Write a comparator, if s1 equals to s2, return 0; else return -(s1 + s2).compareTo(s2 + s1). Need to pay attention to all zeros condition.	
+
+First Missing Positive	
+
++ Abstraction: Hashing	
++ Utilize the array index nature, hash every positive integer that between 1 to A.length, into A[integer - 1]. For integer out of this range, simply let them stay where they are.	
+
+Trapping Rain Water	
+
++ Abstraction: Cache + divide & conquer.	
++ Scan from left to right, find out the max left for each position. Then scan from right to left and calculate how many water can be trapped at this point. The trap area at some point is max(0, min(left[i], right[i]) - A[i]).	
+
+Multiply Strings	
+
++ Abstraction: Multiply digit by digit. Pay attention to carry and preceding zeros.	
 
 
 <hr />

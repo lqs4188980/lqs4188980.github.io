@@ -675,4 +675,77 @@ An array is not automatically **Iterable**.
 
 > When you have one interface and you need another one, and you cannot override the old one, writing an adapter solves the problem.	
 
-**Arrays.asList()** produces a **List** object that uses the underlying array as its physical implementation. If you do anything to that **List** that modifies it, and you don't want the original array modified, you should make a copy into another container.
+**Arrays.asList()** produces a **List** object that uses the underlying array as its physical implementation. If you do anything to that **List** that modifies it, and you don't want the original array modified, you should make a copy into another container.	
+
+<hr />
+
+Ch11: Error Handling with Exceptions	
+------------------------------------------------------------	
+
+###Concepts	
+
+Exception handling makes code clearer and much readable.	
+
+###Basic exceptions	
+
+An <i>exceptional condition</i> is a problem that prevents the continuation of the current method or scope.	
+
+When you throw an exception, several things happen.	
+
+1. The exception object is created in the same way that any Java object is created.	
+2. Current path of execution is stopped and the reference for the exception object is ejected from the current context.	
+3. Exception-handling mechanism takes over and begins to look for an appropriate place to continue executing the program. This appropriate place is the <i>exception handler</i>, whose job is to revocer from the problem so the program can either try another tack or just continue.	
+
+####Exception arguments	
+
+Every standard exception class has two constructors, the default one and another one which takes a string as argument. 	
+
+When **throw** an exception, you give the resulting reference to **throw**. The exception object is ""returned" from the method.	The place where exception returned to is different to the place where normal execution return. 	
+
+###catching an exception	
+
+<i>Guarded Region</I>	
+This is a section of code that might produce exceptions and is followed by the code to handle those exceptions.	
+
+####The **try** block	
+If you're throw an exception inside a method, that method will stop execution and return to exception handler; if you don't want to exit, you should use **try** block.	
+
+####Exception handlers	
+Exception handlers immediately follow the **try** block and are denoted by the keyword **catch**.	
+
+###Creating your own exceptions	
+
+	e.printStackTrace();	
+
+The default version will print the stack information to standard error stream.	
+
+####Exceptions and logging	
+
+java.util.logging.logger	
+
+Call the static Logger.getLogger("") method get a logger, then use a stringwriter wrapped around by a printwriter, send to e.printStackTrace to convert the stack trace into string. Then call logger's severe level method and write the stack trace into logging.	
+
+###The exception specification	
+
+<i>exception specification</I> is part of the method declaration, appearing after the argument list. This specification uses an additional keyword, **throws**, followed by a list of all the potential exception types. If no exceptions are specified, then it default throws **RuntimeException**, which can be thrown anywhere without exception specifications.	
+
+> Exceptions that are checked and enforced at compile time are called <i>checked exceptions</I>.	
+
+###Catching any exception	
+
+####The stack trace	
+
+> The information provided by **printStackTrace()** can also be accessed directly using **getStackTrace()**. This method returns an array of stack trace elements, each representing one stack frame. Element zero is the top of the stack, and is the last method invocation in the sequence.	
+
+####Re-throwing an exception	
+
+> Re-throwing an exception causes it to go to the exception handlers in the next higher context. Any further **catch** clauses for the same **try** block are still ignored. 	
+	If you simply re-throw the current exception, the information that you print about that exception in **printStackTrace()** will pertain t the exception's origin, not the place where you re-throw it. If you want to install new stack trace information, you can do so by calling **fillInStackTrace()**, which returns a **Throwable** object that it creates by stuffing the current stack information into the old exception object.	
+
+####Exception chaining	
+
+<i>exception chaining</I>: catch one exception and throw another, but still keep the information about the originating exception.	
+
+You can take a <i>cause</i> object in **Throwable** subclasses in their constructor.	
+
+> Its' interesting to note that the only **Throwable** subclasses that provide the <i>cause</i> argument in the constructor are the three fundamental exception classes **Error, Exception, RuntimeException**. If you want to chain any other exception types, you do it through the **initCause()** method rather than the constructor.
