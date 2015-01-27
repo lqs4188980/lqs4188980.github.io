@@ -221,7 +221,22 @@ Trapping Rain Water
 
 Multiply Strings	
 
-+ Abstraction: Multiply digit by digit. Pay attention to carry and preceding zeros.	
++ Abstraction: Multiply digit by digit. Pay attention to carry and preceding zeros.		
+
+Wildcard Matching	
+
++ Abstraction: Greedy	
++ Every time we meet a '\*', record the position of last '\*' and position of p1, then match start from behind star with current p1, and set prevStar is true. Then if match(symbol equality or question mark), increase both pointer and set prevStar to false. If not match: if last star position is -1, which means no star in pattern, return false; else return pattern pointer to star and return sequence pointer to cached p1 position plus one and continue matching.	When p1 going to the end of sequence, we check remaining pattern is all the star, if true, then return true, else return false.	
+
+Jump Game II	
+
++ Abstraction: Greedy	
++ For each l to r range, find out maximum position that r can reach. If scanner pointer reach r, then update l to r + 1, r to max and start scan from l.	
+
+Permutations	
+
++ Abstraction: Mathematic	
++ We build new permutation by add the new element to available insert point of each old permutation.
 
 
 <hr />
