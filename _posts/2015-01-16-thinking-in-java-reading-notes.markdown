@@ -748,4 +748,15 @@ Call the static Logger.getLogger("") method get a logger, then use a stringwrite
 
 You can take a <i>cause</i> object in **Throwable** subclasses in their constructor.	
 
-> Its' interesting to note that the only **Throwable** subclasses that provide the <i>cause</i> argument in the constructor are the three fundamental exception classes **Error, Exception, RuntimeException**. If you want to chain any other exception types, you do it through the **initCause()** method rather than the constructor.
+> Its' interesting to note that the only **Throwable** subclasses that provide the <i>cause</i> argument in the constructor are the three fundamental exception classes **Error, Exception, RuntimeException**. If you want to chain any other exception types, you do it through the **initCause()** method rather than the constructor.	
+
+###Standard Java exceptions	
+
+There are two general types of **Throwable** objects.	
+
++ **Error** represents compile-time and system errors that you don't worry about catching.	
++ **Exception** is the basic type that can be thrown from any of the standard Java library class methods and from your methods and runtime accidents.	
+
+####Special case: **RuntimeException**	
+
+**RuntimeException**s are <i>unchecked exceptions</i>.
