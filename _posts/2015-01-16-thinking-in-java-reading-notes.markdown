@@ -759,4 +759,72 @@ There are two general types of **Throwable** objects.
 
 ####Special case: **RuntimeException**	
 
-**RuntimeException**s are <i>unchecked exceptions</i>.
+**RuntimeException**s are <i>unchecked exceptions</i>.	
+
+Only exceptions of type **RuntimeException** can be ignored in your coding, since the compiler carefully enforces the handling of all checked exception.	
+
+###Performing cleanup with **finally**	
+
+####what's **finally** for?	
+
+> The **finally** clause is necessary when you need to set something <i>other</i> than memory back to its original state.	
+
+**finally** can work with break and continue statements, which eliminates the need for a **goto** statement in Java.	
+
+####Using **finally** during **return**	
+
+For Multiple **return**, we can use **finally** guarantee cleanup. (but the **return** statement must in try block).	
+
+####Pitfall: the lost exception	
+
+Embed a try-finally block inside a try-catch block may cause exception of inner block totally lost.	
+Also, using **return** inside the **finally** block will silence any thrown exception.	
+
+###Exception restrictions	
+
+> When you override a method, you can throw only the exceptions that have been specified in the base-class version of the method.	
+
+This restriction does not apply to constructors.. However, since a base-class constructor must always be called one way or another, the derived-class constructor must declare any base-class constructor exceptions in its exception specification.	
+
+A derived-class constructor cannot catch exceptions thrown by its base-class constructor.	
+
+A derived-class version of method may choose not to throw any exceptions, even if the base-class version does. It will not break the exception mechanism when treated as base-class version.	
+
+If an object is cast to base-class type, it forces to catch all the base-class exceptions.	
+
+###Constructors	
+
+The safest way to use a class which might throw an exception during construction and which requires cleanup is to use nested **try** blocks.	
+
+###Exception matching	
+
+When an exception is thrown, the exception-handling system looks through the "nearest" handlers in the order they are written. When it fins a match, the exception is considered handled, and no further searching occurs.	
+
+A derived-class object will match a handler for the base class.	
+
+Compiler does not allow using base-class catch clause to mask the derived-class exceptions.	
+
+###Alternative approaches	
+
+> One of the important guidelines in exception handling is "Don't catch an exception unless you know what to do with it."	
+
+####Passing exceptions to the console	
+
+####Converting checked to unchecked exceptions	
+
+"Wrap" a checked exception inside a **RuntimeException** by passing it to the **RuntimeException** constructor.	
+
+###Exception guidelines	
+
+Use exceptions to:	
+
+1. Handle problems at the appropriate level.	
+2. Fix the problem and call the method that caused the exception again.	
+3. Patch things and continue without retrying the method.	
+4. Calculate some alternative result instead of what the method was supposed to produce.	
+5. Do whatever you can in the current context and rethrow the same exception to a higher context.	
+6. Do whatever you can in the current context and throw a different exception to a higher context.	
+7. Terminate the program.	
+8. Simplify.	
+9. Make your library and program safer.	
+
