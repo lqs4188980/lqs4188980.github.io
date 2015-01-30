@@ -236,7 +236,23 @@ Jump Game II
 Permutations	
 
 + Abstraction: Mathematic	
-+ We build new permutation by add the new element to available insert point of each old permutation.
++ We build new permutation by add the new element to available insert point of each old permutation.	
+
+Rotate Image	
+
++ Abstraction: Array manipulation	
++ Use start and end set boundary, use i and j to track 	
+
+Anagrams	
+
++ Abstraction: Anagram basic usage. As a signature(key).	
+
+Pow(x, n)	
+
++ Abstraction: Divide & Conquer. 	
++ Divide pow(x, n) into two pow(x, n / 2); Assume, v = pow(x, n / 2), if n % 2 == 0, return v * v; else, return v * v * x.	
+
+
 
 
 <hr />

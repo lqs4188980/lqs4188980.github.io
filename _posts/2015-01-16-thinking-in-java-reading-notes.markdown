@@ -828,3 +828,92 @@ Use exceptions to:
 8. Simplify.	
 9. Make your library and program safer.	
 
+<br />	
+
+Ch12: Strings	
+-----------------------------------	
+
+###Immutable **String**s	
+
+Object of the **String** class are immutable.	
+
+###Overloading '+' vs. **StringBuilder**	
+
+When JVM do '+' with strings, it actually creates a new StringBuilder object and do append, then it call toString() to generate a final string. However, compiler cannot optimize for loop: it will generate a new StringBuilder object every loop for string concatenation.	
+
+###Unintended recursion	
+
+When concatenate object with a string inside its toString() method, it will cause infinite recursion call to toString() method.	
+
+###Formatting output	
+
+**printf(), System.out.format()** are in a similar way like C's printf function.	
+
+The **Formatter** class is create an object that support formatting output like printf. More object-oriented.	
+
+####Format specifiers	
+
+	 %[argument_index$][flags][width][.precision]conversion	
+
+It is used in **Formatter** object.	
+
+Control the minimum size of a field is accomplished by specifying a <i>width</i>. It will padding spaces if necessary. Default is right justified, can be overridden by including a '-' in the flag section.	
+
+<i>precision</i> is used to specify maximum. For String, it tells the maximum chars will be display; for floating point numbers, it specify maximum number of decimal places to display. If the floating number's decimal exceeded the maximum, it will round to maximum, or appending zeros if not reach the maximum. It cannot apply to integers, will get exception when used for integer.	
+
+####**Formatter** conversions	
+
+<table border="1" style="width:50%">
+	<th colspan='2'>Conversion Characters</th>
+	<tr>
+		<th>d</th>
+		<td>Integral (as decimal)</td>
+	</tr>
+
+	<tr>
+		<th>c</th>
+		<td>Unicode character</td>
+	</tr>
+
+	<tr>
+		<th>b</th>
+		<td>Boolean value</td>
+	</tr>
+
+	<tr>
+		<th>s</th>
+		<td>String</td>
+	</tr>
+
+	<tr>
+		<th>f</th>
+		<td>Floating point(as decimal)</td>
+	</tr>
+
+	<tr>
+		<th>e</th>
+		<td>Floating point(in scientific notation)</td>
+	</tr>
+
+	<tr>
+		<th>x</th>
+		<td>Integral(as hex)</td>
+	</tr>
+
+	<tr>
+		<th>h</th>
+		<td>Hash code(as hex)</td>
+	</tr>
+
+	<tr>
+		<td>%</td>
+		<td>Literal "%"</td>
+	</tr>
+</table>
+For 'b' conversions, which means output as boolean value, it is valid for any argument type. For any non-boolean argument, as long as the argument type is not **null** the result is always **true**.	
+
+####**String.format()**	
+
+This is used to create **String**s. Like C's **sprintf()**.	
+> **String.format()** is a **static** method which takes all the same arguments as **Formatter's format()** but returns a **String**. It can come in handy when you only need to call **format()** once.	
+
