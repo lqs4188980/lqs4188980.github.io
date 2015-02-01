@@ -917,3 +917,58 @@ For 'b' conversions, which means output as boolean value, it is valid for any ar
 This is used to create **String**s. Like C's **sprintf()**.	
 > **String.format()** is a **static** method which takes all the same arguments as **Formatter's format()** but returns a **String**. It can come in handy when you only need to call **format()** once.	
 
+###Regular expressions	
+
+####Basics
+In Java, if you want to use '\d' to represent one or more digits, you should use '\\d'. If you want to insert a literal backslash, you say '\\\\'.	
+
+To indicate "one or more of the preceding expression", you use a '+'.	
+
+String class has built in `.matches()` method.	
+
+String's `split` method means "Split this string around matches of the given regular expression."	
+
+`replaceFirst`, `replaceAll` can replace the first occurrence or all of them.	
+
+####Quantifiers	
+
+A <i>quantifier</i> describes the way that a pattern absorbs input text	
+
++ <i>Greedy</i>: A greedy expression finds as many possible matches for the pattern as possible.	
+
++ <i>Reluctant</i>: Specified with a question mark, this quantifier matches the minimum number of characters necessary to satisfy the pattern. <i>don-greedy</i>	
+
++ <i>Possessive</i>: Currently only available in Java. Possessive quantifiers do not keep intermediate states, and prevent backtracking.	
+
+####**Pattern** and **Matcher**	
+
+Using `java.util.regex` library, call `static Pattern.compiler()` method first to produce a **Pattern** object. Then call `matcher()` method, passing the string that you want to search. 
+
+> The `matcher()` method produces a **Matcher** object, which has a set of operations to choose from.	
+
+#####find()	
+
+> `Matcher.find()` can be used to discover multiple pattern matches in the *CharSequence* to which it is applied.	
+
+> `find()` is like an iterator, moving forward through the input string. `find(int index)` can be given an integer argument that tells it the character position for the beginning of the search - this version resets the search position to the value of the argument.	
+
+#####Groups	
+
+> Groups are regular expressions set off by parentheses that can be called up later with their group number. Group 0 indicates the whole expression match, group 1 is the first parenthesized group, etc.	
+
+#####**start()** and **end()**	
+
+**start()** returns the start index of the previous match, and **end()** returns the index of the last character matched, plus one.	
+
+#####**Pattern** flags	
+
+###Scanning input	
+
+> A **StringReader** turns a **String** into a readable stream, and this object is used to create a **BufferedReader** has a **readLine()** method. 
+
+Or you can use **Scanner** class.	
+
+> By default, a **Scanner** splits input tokens along whitespace, but you can also specify your own delimiter pattern in the form of a regular expression.	
+
+> There is one caveat when scanning with regular expressions. The pattern is matched against the next input token only, so if your pattern contains a delimiter it will never be matched.	
+
