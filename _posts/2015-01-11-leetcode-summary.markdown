@@ -252,7 +252,15 @@ Pow(x, n)
 + Abstraction: Divide & Conquer. 	
 + Divide pow(x, n) into two pow(x, n / 2); Assume, v = pow(x, n / 2), if n % 2 == 0, return v * v; else, return v * v * x.	
 
+N-Queens	
 
++ Abstraction: back-tracking	
++ isValid: same column cannot have queen; for i = 0; i < row, Math.abs(i - row) != Math.abs(checker[i]  - col).	
+
+Maximum Subarray 	
+
++ Abstraction: Dynamic Programming	
++ maxEndingHere = Math.max(maxEndingHere + A[i], A[i]); maxSofar = Math.max(maxEndingHere, maxSofar)
 
 
 <hr />

@@ -828,7 +828,7 @@ Use exceptions to:
 8. Simplify.	
 9. Make your library and program safer.	
 
-<br />	
+<hr />	
 
 Ch12: Strings	
 -----------------------------------	
