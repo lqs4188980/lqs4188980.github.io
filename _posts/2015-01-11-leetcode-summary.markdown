@@ -260,7 +260,27 @@ N-Queens
 Maximum Subarray 	
 
 + Abstraction: Dynamic Programming	
-+ maxEndingHere = Math.max(maxEndingHere + A[i], A[i]); maxSofar = Math.max(maxEndingHere, maxSofar)
++ maxEndingHere = Math.max(maxEndingHere + A[i], A[i]); maxSofar = Math.max(maxEndingHere, maxSofar)	
+
+Jump Game	
+
++ Abstraction: Same as Jump Game II. Greedy Strategy	
+
+Merge Intervals	
+
++ Abstraction: A little bit like merge step in merge sort.	
++ Sort the intervals based on interval start, then merge the overlapped intervals one by one.	
+
+Insert Interval	
+
++ Abstraction: Similar to Merge Intervals.	
++ Do a small insertion sort first, insert newInterval to a correct position. Then start merge like merge intervals.	
+
+Length of Last Word	
+
++ Abstraction: Decide if current status is in a word.	
+
+
 
 
 <hr />
