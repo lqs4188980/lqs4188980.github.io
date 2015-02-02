@@ -972,3 +972,77 @@ Or you can use **Scanner** class.
 
 > There is one caveat when scanning with regular expressions. The pattern is matched against the next input token only, so if your pattern contains a delimiter it will never be matched.	
 
+<hr />
+
+Ch13: Type Information	
+------------------------------------------	
+
+Runtime type information (RTTI)	
+
+###The need for RTTI	
+Polymorphism requires RTTI.	
+
+> With RTTI, you can ask a **Shape** reference the exact type that it's referring to, and thus select and isolate special cases.	
+
+###The **Class** object	
+
+Type information is represented by a special kind of object called the <i>Class object</i> at runtime.	
+
+> In fact, the **Class** object is used to create all of the "regular" objects of your class.	
+
+> There is one **Class** object for each class that is part of your program. That is, each time you write and compile a new class, a single **Class** object is also created (and stored, appropriately enough, in an identically named **.class** file).	
+
+JVM use <i>class loader</i> to make an object of that class.	
+
+> All classes are loaded into the JVM dynamically, upon the first use of a class. This happens when the program makes the first reference to a **static** member of that class. It turns out that the constructor is also a **static** method of a class.	
+
+> All **Class** objects belong to the class **Class**. A **Class** object is like any other object, so you can get and manipulate a reference to it. One of the ways to get a reference to the **Class** object is the `static forName()` method, which takes a **String** containing the textual name of the particular class you want a reference for. It returns a **Class** reference.	
+
+If it fail to load a class, it will throw a **ClassNotFoundException**.	
+
+Two way to get a reference to the appropriate **Class** object: `Class.forName()` and if you already have an object of a class, you can call `getClass()` method of **Object** root class.	
+
+The class that's being created with **newInstance()** must have a default constructor. 	
+
+####Class literals	
+
+You can use <i>class literal</i> to produce the reference to the **Class** object. It looks like `ClassName.class`.	
+
+> Class literals work with regular classes as well as interfaces, arrays, and primitive types. In addition, there's a standard field called **TYPE** that exists for each of the primitive wrapper classes.	
+
+> It's interesting to note that creating a reference to a **Class** object using `.class` doesn't automatically initialize the **Class** object. There are actually three steps in preparing a class for use: 	
+1. <i>Loading</i>, which is performed by the class loader. This finds the bytecodes and creates a **Class** object from those bytecodes.	
+2. <i>Linking</i>. The link phase verifies the bytecodes in the class, allocates storage for **static** fields, and if necessary, resolves all references to other classes made by this class.	
+3. <i>Initialization</i>. If there's a superclass, initialize that. Execute **static** initializers and **static** initialization blocks.	
+
+> Initialization is delayed until the first reference to a **static** method or to a non-constant **static** field.	
+
+Use `.class` syntax to get a reference to the class doesn't cause initialization. However, **Class.forName()** initializes the class immediately in order to produce the **Class** reference.	
+
+> If a **static final** value is a "compile-time constant", that value can be read without causing the class to be initialized. However, making a field **static** and **final** does not guarantee this behavior.	
+
+> If a **static** field is not **final**, accessing it always requires linking and initialization.	
+
+####Generic class references	
+
+	Class intClass  = int.class;
+	Class<Integer> genericIntClass = int.class;
+	genericIntClass = Integer.class;
+	intClass = double.class;
+	// genericIntClass = double.class; // Illegal	
+
+But `Class<Number> genericNumberClass = int.class;` is also illegal, because the **Integer Class** object is not a subclass of the **Number Class** object.	
+
+To loosen the constraints when using generic **Class** references, you can use <i>wildcard</i>, which is the symbol '?'.	
+
+> In order to create a **Class** reference that is constrained to a type or <i>any subtype</i>, you combine the wildcard with the **extends** keyword to create a <i>bound</i>. Like `Class<? extends Number> bounded = int.class;`	
+
+When you use the generic syntax for **Class** objects: **newInstance()** will return the exact type of the object, rather than just a basic **Object**.	
+
+####New cast syntax	
+
+Get a class object reference first, then call `.cast(someobject)` cast the object into this class type. 	
+This syntax is used when you are writing generic code that cannot decide which type to cast until runtime.	
+
+`Class.asSubclass()` allows you to cast the class object to a more specific type.	
+
