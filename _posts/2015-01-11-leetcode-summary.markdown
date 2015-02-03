@@ -280,6 +280,14 @@ Length of Last Word
 
 + Abstraction: Decide if current status is in a word.	
 
+Spiral Matrix II	
+
++ Abstraction: Set up top, down, left, right four limitations and iterate.	
+
+Permutation Sequence	
+
++ Abstraction: Like memory address calculation, group by group. Append each number indexed by group number to the result.	
+
 
 
 
