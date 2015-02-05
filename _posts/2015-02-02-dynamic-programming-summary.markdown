@@ -75,3 +75,16 @@ Assume d[i][j] is the minimum edit distance between A[0...i] and B[0...j].
 		else, min(d[i-1][j] + 1, d[i][j-1] + 1,d[i-1][j-1] + 1)
 	}		
 
+
+Min Cost Path	
+-----------------------	
+
+[Source](http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/)
+
+Given a cost matrix and a position (m, n), find out the minimum cost path to reach (m, n) from (0, 0). There are three ways allow you to go: down, right and diagonal to lower right.
+
+Optimal Substructure: 
+
+	minimum(m, n) = min(minimum(m - 1, n), minimum(m, n - 1), minimum(m - 1, n - 1)) + cost[m][n]	
+
+It has overlapping Subproblems, so it can use Dynamic Programming

@@ -288,6 +288,14 @@ Permutation Sequence
 
 + Abstraction: Like memory address calculation, group by group. Append each number indexed by group number to the result.	
 
+Rotate List	
+
++ Abstraction: Connect the list tail to head, and find the relative rotation number by n % count, then move head to (count - n % count)th node, then detach it's previous node.
+
+Unique Paths	
+
++ Abstraction: pathCount[i][j] = pathCount[i-1][j] + pathCount[i][j - 1]	
+
 
 
 
