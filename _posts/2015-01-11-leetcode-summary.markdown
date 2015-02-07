@@ -296,7 +296,13 @@ Unique Paths
 
 + Abstraction: pathCount[i][j] = pathCount[i-1][j] + pathCount[i][j - 1]	
 
+Minimum Path Sum	
 
++ Abstraction: costs[i][j] = min(costs[i - 1][j], costs[i][j - 1]) + grid[i][j];	
+
+Merge Two Sorted Lists	
+
++ Abstraction: Merge step in MergeSort
 
 
 <hr />

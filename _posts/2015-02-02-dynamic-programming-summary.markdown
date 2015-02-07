@@ -87,4 +87,9 @@ Optimal Substructure:
 
 	minimum(m, n) = min(minimum(m - 1, n), minimum(m, n - 1), minimum(m - 1, n - 1)) + cost[m][n]	
 
-It has overlapping Subproblems, so it can use Dynamic Programming
+It has overlapping Subproblems, so it can use Dynamic Programming	
+
+Length of the longest substring without repeating characters	
+-------------------------------------------------------------------------	
+
+Maintain a substring window that don't have repeating characters, and record the last position of each character. If the current character haven't been accessed or the last position is out of current window, then enlarge the window and record this position to corresponding slots, update the max length at the same time.

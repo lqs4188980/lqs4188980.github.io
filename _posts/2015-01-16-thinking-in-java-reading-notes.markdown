@@ -1122,3 +1122,41 @@ Using RTTI, we can discover a possible more specific type of an object, and cast
 
 Reflection can help us call the methods that we cannot see from outside using `callHiddenMethod()`.	
 
+<hr />	
+
+Ch 14: Generics	
+-------------------------	
+
+"Generics" means "pertaining or appropriate to large groups of classes". 	
+
+### Simple generics	
+
+> One of the most compelling initial motivations for generics is to create <i>container classes</i>.	
+
+> One of the primary motivations for generics is to specify what type of object a container holds, and to have that specification backed up by the compiler.	
+
+#### A tuple library	
+
+Tuple allows you to return multiple return values in a single function return statement. 	
+
+> It is simply a group of objects wrapped together into a single object. The recipient of the object is allowed to read the elements but not put new ones in. (This concept is also called a <i>Data Transfer Object or Messenger</i>) 	
+
+	public class TwoTuple<A, B> {
+		public final A first;
+		public final B second;
+		public TwoTuple(A a, B, b) {
+			first = a;
+			second = b;
+		}
+
+		public String toString() {
+			return  "(" + first + ", " + second + ")";
+		}
+	}
+
+Declare first and second as **final** can prevent re-assign value.	
+
+
+### Generic interfaces	
+
+
