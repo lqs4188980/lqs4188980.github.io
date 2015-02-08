@@ -1159,4 +1159,28 @@ Declare first and second as **final** can prevent re-assign value.
 
 ### Generic interfaces	
 
+You cannot use primitives as type parameters.	
+
+> The class itself may or may not be generic - this is independent of whether you have a generic method.	
+
+> If a method is **static**, it has no access to the generic type parameters of the class.	
+
+Simply place a generic parameter list before the return value to make a method generic.	
+
+> Notice that with a generic class, you must specify the type parameters when you instantiate the class. But with a generic method, you don't usually have to specify the parameter types, because the compiler can figure that out for you. This is called <i>type argument inference</i>.  So calls to **f()** look like normal method calls, and it appears that **f()** has been infinitely overloaded.	
+
+	// Initializing Generic Class
+	ArrayLIst<Integer> list = new ArrayList<Integer>();
+
+	// Define generic method	
+	public <T> void f(T x) {
+		System.out.println(x.getClass().getName());
+	}	
+
+	// Then you can call it like this	
+	gm.f("");
+	gm.f(1);
+	gm.f(1.0);
+	......	
+
 
