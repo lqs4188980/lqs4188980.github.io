@@ -1183,4 +1183,34 @@ Simply place a generic parameter list before the return value to make a method g
 	gm.f(1.0);
 	......	
 
+#### Leveraging type argument inference	
+
+> Type inference doesn't work for anything other than assignment. If you pass the result of a method call such as **New.map()** as an argument to another method, the compiler will not try to perform type inference. Instead it will treat the method call as though the return value is assigned to a variable of type **Object**.	
+
+You can explicitly specify the type in a generic method. You place the type in angle brackets after the dot and immediately preceding the method name. 	
+
+#### Varargs and generic methods	
+
+	public static <T> List<T> makeList(T... args) {
+		List<T> result = new ArrayList<T>();
+		for (T item : args) {
+			result.add(item);
+		}
+
+		return result;
+	}
+
+#### A generic method to use with **Generator**s.	
+
+Use generator to fill a **Collection**.	
+
+	public static <T> Collection<T>
+	fill(Collection<T> coll, Generator<T> gen, int n) {
+		for (int i = 0; i < n; ++i) {
+			coll.add(gen.next());
+		}
+
+		return coll;
+	}
+
 
