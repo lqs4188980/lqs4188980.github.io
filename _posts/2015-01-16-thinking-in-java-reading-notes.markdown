@@ -1213,4 +1213,60 @@ Use generator to fill a **Collection**.
 		return coll;
 	}
 
+#### A general-purpose **Generator**	
 
+	public class BasicGenerator<T> implements Generator<T> {
+		private Class<T> type;
+		public BasicGenerator(Class<T> type) {
+			this.type = type;
+		}
+
+		public T next() {
+			try {
+				// Assumes type is a public class
+				return type.newInstance();
+			} catch(Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		// Produce a Default generator given a type token:
+		public static <T> Generator<T> create(Class<T> type) {
+			return new BasicGenerator<T>(type);
+		}
+	}
+
+
+### Anonymous inner classes	
+
+Generics can also be used with inner classes and anonymous inner classes. We can implement **Generator** interface using anonymous inner classes.	
+
+### The mystery of erasure	
+
+	Class c1 = new ArrayList<String>().getClass();
+	Class c2 = new ArrayList<Integer>().getClass();
+	c1 == c2 // True	
+
+> There's no information about generic parameter types available inside generic code.	
+
+Java generics are implemented using <i>erasure</i>.	
+
+#### The C++ approach	
+
+Calling a generic type object method in a generic class, C++ will check at compile time if this object has the method. Java cannot check this at compile time, so it checks <i>bound</i>. We can use `<T extends someClass>` to give a bound for generic type, otherwise the bound is Object type.
+
+> We say that a generic type parameter <i>erases to its first bound</i> (it's possible to have multiple bounds). We also talk about the <i>erasure of the type parameter</i>. The compiler actually replaces the type parameter with its erasure.	
+
+#### Migration compatibility	
+
+It is not a language feature, but a compromise in the implementation.	
+
+> In an erasure-based implementation, generic types are treated as secondclass types that cannot be used in some important contexts.	
+
+#### The action at the boundaries	
+
+> Note that using **Array.newInstance()** is the recommended approach for creating arrays in generics.	
+
+> Even though erasure removes the information about the actual type inside a method or class, the compiler can still ensure internal consistency in the way that the type is used within the method or class.	
+
+> All the action in generics happens at the boundaries - the extra compile-time check for incoming values, and the inserted cast for outgoing values. 
