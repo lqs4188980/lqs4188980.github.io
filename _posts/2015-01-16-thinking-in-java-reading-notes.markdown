@@ -1269,4 +1269,20 @@ It is not a language feature, but a compromise in the implementation.
 
 > Even though erasure removes the information about the actual type inside a method or class, the compiler can still ensure internal consistency in the way that the type is used within the method or class.	
 
-> All the action in generics happens at the boundaries - the extra compile-time check for incoming values, and the inserted cast for outgoing values. 
+> All the action in generics happens at the boundaries - the extra compile-time check for incoming values, and the inserted cast for outgoing values. 	
+
+### Compensating for erasure	
+
+> Occasionally you can program around these issues, but sometimes you must compensate for erasure by introducing a <i>type tag</i>. This means you explicitly pass in the **Class** object for your type so that you can use it in type expressions.	
+
+#### Creating instances of types	
+
+In generic class, there are reasons that cannot create a new instance of type T: one is the type information has been erased; the other one is compiler compiler cannot verify that T has a default constructor.	
+
+#### Arrays of generics	
+
+We cannot directly create an array of generics using T[] array = new T[size], so we create an array of objects and cast it.	
+
+	T[] array = (T[])new Objects[size];	
+
+The array type that passing out from generic class is **Object[]**. 
