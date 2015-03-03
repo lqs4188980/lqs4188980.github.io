@@ -1285,4 +1285,11 @@ We cannot directly create an array of generics using T[] array = new T[size], so
 
 	T[] array = (T[])new Objects[size];	
 
-The array type that passing out from generic class is **Object[]**. 
+The array type that passing out from generic class is **Object[]**. 	
+
+### Bounds	
+
+	interface HasColor { Java.awt.Color getColor(); }	
+	class Dimension { public int x, y, z;}	
+	// class must be first, then interfaces, and you can have only one concrete class but multiple interfaces
+	class ColoredDimension<T extends Dimension & HasColor> {}

@@ -304,6 +304,12 @@ Merge Two Sorted Lists
 
 + Abstraction: Merge step in MergeSort
 
+Repeated DNA Sequences	
+
++ Abstraction: Search, caching, hash.	
++ Basically, we should count how many appearance for each substring at length 10 in the whole string. However, we will count many strings again and again, so we need a set to store all the substring that has been searched. Then, what we care about is the substring that appear more than once, so we do not need to count how many appearance for each substring, we use another set to store all the substrings that appear twice. If it in the set that appear once but not in the set that appear twice, then add it to the result. 	
+	We need utilize hash to compress substring into an integer. For DNA sequences, there are four units: A,C,G,T, which can fit into 00, 01, 10, 11. So we shift left an integer and do OR operation with the corresponding value of the unit, then we can get a hash value for a substring of length 10.
+
 
 <hr />
 
