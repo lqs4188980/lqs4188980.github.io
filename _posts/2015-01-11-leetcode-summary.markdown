@@ -310,6 +310,10 @@ Repeated DNA Sequences
 + Basically, we should count how many appearance for each substring at length 10 in the whole string. However, we will count many strings again and again, so we need a set to store all the substring that has been searched. Then, what we care about is the substring that appear more than once, so we do not need to count how many appearance for each substring, we use another set to store all the substrings that appear twice. If it in the set that appear once but not in the set that appear twice, then add it to the result. 	
 	We need utilize hash to compress substring into an integer. For DNA sequences, there are four units: A,C,G,T, which can fit into 00, 01, 10, 11. So we shift left an integer and do OR operation with the corresponding value of the unit, then we can get a hash value for a substring of length 10.
 
+Word Search
+
++ Abstraction: Depth First Search.
++ When we start searching, we are tring to find a path that match the word. So it is depth first search, because we are not find all the paths. The tricky part is we need a table to record our steps, because we don't want return to visited node. So you might need a copy of the table for each new search so that the history won't affect each branch. However, it is depth first search, which means we will search a different branch after getting a result in current branch(Success or Fail). So if we failed, we can simply recover the visited node to 'False' then return to previous level. Thus, we can use only one array without copy them around.
 
 <hr />
 
