@@ -315,6 +315,98 @@ Word Search
 + Abstraction: Depth First Search.
 + When we start searching, we are tring to find a path that match the word. So it is depth first search, because we are not find all the paths. The tricky part is we need a table to record our steps, because we don't want return to visited node. So you might need a copy of the table for each new search so that the history won't affect each branch. However, it is depth first search, which means we will search a different branch after getting a result in current branch(Success or Fail). So if we failed, we can simply recover the visited node to 'False' then return to previous level. Thus, we can use only one array without copy them around.
 
+Word Break II
+
++ Abstraction: Dynamic Programming + backtracking
++ Two points needs to be attention: 
+    1. Use dynamic programming decide if s can be completely break: 
+            
+        s[0, n] = true if s[0,n] is a word; or there exists a j in [0, i] that s[0, j - 1] is true and s[j, i] is a word.
+
+	2. Then do a search using backtracking, no trick.
+
+Wiggle Sort
++ Abstraction: Quicksort
++ Sort the array using quicksort; then reverse position of all the odd index elements with the it's next element.
++ A better way is recursively find median, then:
+
+    1. If length of array is even, then put the numbers less than median to length - 2, length - 4 ......; put numbers greater than median to 1, 3, 5......
+	2. If length of array is odd, put the numbers greater than median to length - 2, length - 4, ......; put numbers less than median to 0, 2, 4, ......
+	3. Filling median to the other position.
+
++ For Wiggle Sort II, simply reverse odd element with right neighbor is not enough, because you have to solve equality problem. After sorting, we split the array into two parts, then start from (length + 1) / 2 and length respectively, filling the result in turn.
+
+Verify Preorder Serialization of a Binary Tree
+
++ Abstraction: Binary tree structure
++ Continuously delete leaf node in pre-order sequence. The leaf node is "<node>, #, #", so we can substitute each of this pattern with a "#", until we cannot find this pattern. Then we check if the string is equal to "#"
+
+Valid Parentheses
+
++ Abstraction: Stack, Hashmap
++ One stack tracking unpaired open parentheses; one hashmap use close parentheses as key, map to correct open parentheses. For each token, if it is a close parentheses, then if stack is empty or stack top is not the corresponding open parentheses, return false; otherwise, push to stack. Finally, if stack is empty, return true; otherwise, return false.
+
+Unique Word Abbreviation
+
++ Abstraction: Hashmap
++ Maintain a hashmap, use abbreviation as key, a unique word or an empty string as value in dictionary: If this word is unique in dictionary, then use this word as value; otherwise, use empty string. Then we get query string's abbreviation, check if this abbreviation exists; if it not exists, return true; otherwise, if this word equal to corresponding word in value, then return true; otherwise, return false.
+
+Number of Islands II
++ Abstraction: Disjoint Set
++ Use disjoint set keep all the connected islands. For each addland operation, find if point is land. if it's not, then find if it's 4 directions are lands, assuming t directions are lands, then the total lands will reduce t - 1.
++ Join land process: 
+	1. Find parents of current operation point and current neighbor point
+	2. If those parents are not equal, then union those two points
+
+    		class UnionFind{
+        		HashMap<Integer, Integer> father = new HashMap<Integer, Integer>();
+        		UnionFind(int n, int m){
+            		for(int i = 0 ; i < n; i++) {
+                		for(int j = 0 ; j < m; j++) {
+                    		int id = converttoId(i,j,m);
+                    		father.put(id, id); 
+                		}
+            		}
+        		}
+        		int compressed_find(int x){
+            		int parent =  father.get(x);
+            		while(parent!=father.get(parent)) {
+                		parent = father.get(parent);
+            		}
+            		int temp = -1;
+            		int fa = x;
+            		while(fa!=father.get(fa)) {
+                		temp = father.get(fa);
+                		father.put(fa, parent) ;
+                		fa = temp;
+            		}
+            		return parent;
+                
+        		}
+        
+        		void union(int x, int y){
+            		int fa_x = compressed_find(x);
+            		int fa_y = compressed_find(y);
+            		if(fa_x != fa_y)
+                		father.put(fa_x, fa_y);
+        		}
+    		}
+
+Ugly Number II & Super Ugly Number
+
++ Abstraction: Dynamic Programming
++ For each primes, create a counter for them. Each time, choose 
+		
+		ith = Math.min(prime[x] * primecounter[prime[x]], x from 0 to prime.length)
+		if ith == any of their value, ++corresponding counter
+		if ugly[i - 1] == ith, --i
+		else ugly[i] = ith
+
+
+Summary Ranges
+
++ Abstraction: window process
++ We maintain a window: a min for left boundary of a range, an expect for next expected value. We check if current element equal to expected: if yes, ++expected; if not, check if min == expected - 1: if yes, then add only min to range; if not add a new string "<min> -> <expected - 1>"
 <hr />
 
 Database
